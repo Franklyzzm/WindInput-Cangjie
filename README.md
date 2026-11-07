@@ -7,7 +7,7 @@
 
 ## 使用方法
 1. 打包下载zip，
-2. 把 `.\WindInput-japanese` 里的三个文件复制到 `%APPDATA%\WindInput\schemas\japanese\`，也就是 `japanese\` 子目录，名字要和 `japanese.schema.toml` 里 `path` 写的 `japanese/…` 一致。
-3. 把 `japanese.schema.toml` 放到 `schemas\`，`schema_overrides\japanese.toml` 放到 `schema_overrides\`。
-4. 在 `config.toml` 的 `schema.available` 里加上 "japanese"，重启输入法或切换到该方案。
+2. 把 `.\WindInput-cangjie` 里的文件复制到 `%APPDATA%\WindInput\schemas\cangjie5\`，也就是 `cangjie5\` 子目录，名字要和 `cangjie5.schema.toml` 里 `path` 写的 `cangjie5/…` 一致。
+3. 把 `cangjie5.schema.toml` 放到 `schemas\`。
+4. 在 `config.toml` 的 `schema.available` 里加上 "cangjie5"，重启输入法或切换到该方案。
 
