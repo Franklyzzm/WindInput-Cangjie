@@ -1,0 +1,63 @@
+[schema]
+id = "cangjie5"
+name = "倉頡五代"
+icon_label = "倉"
+version = "1.0"
+author = "基于 rime/rime-cangjie 数据"
+description = "倉頡五代（《五倉世紀》碼表），含擴展區漢字與快趣詞組編碼"
+
+[engine]
+type = "codetable"
+
+[engine.codetable]
+max_code_length = 5      # 倉頡最長 5 碼
+base_sort = "natural"    # R2 无词频，保持词库文件原顺序
+input_chars = ""         # 留空=默认字符集（a-z）
+
+# 主词库：直接复制 rime-cangjie 的 cangjie5.base.dict.yaml（R2），不改动
+[[dictionaries]]
+id = "cangjie5_base"
+label = "倉頡五代主詞庫"
+description = "《五倉世紀》單字碼表"
+path = "cangjie5/cangjie5.base.dict.yaml"
+type = "rime_codetable"
+default = true
+weight_as_order = true
+
+# 擴展區漢字：直接复制 cangjie5.extended.dict.yaml（R4），不改动；对应 Rime「增廣」，默认关闭
+[[dictionaries]]
+id = "cangjie5_extended"
+label = "擴展區漢字"
+description = "CJK 擴展區及兼容漢字，對應 Rime 的「增廣」"
+path = "cangjie5/cangjie5.extended.dict.yaml"
+type = "rime_codetable"
+default_enabled = false
+weight_as_order = true
+
+# 快趣詞組：Rime 里没有现成文件（编译时由 essay 词表+构词规则生成），这里离线预生成，带词频
+[[dictionaries]]
+id = "cangjie5_phrases"
+label = "快趣詞組"
+description = "按倉頡五代構詞規則預生成的詞組（來源 rime-essay）"
+path = "cangjie5/cangjie5.phrases.dict.yaml"
+type = "rime_codetable"
+default_enabled = true
+
+# ---- 动态造词用的构词规则（Rime 原规则，未作修改）----
+# 若加载方案时报错或日志提示 formula 不合法：删除下面整段 [encoder]，
+# 并保持 schema.codetable.auto_phrase.enabled = false（出厂默认即关闭），
+# 只使用上面的静态词库候选即可。
+[encoder]
+max_word_length = 10
+
+[[encoder.rules]]
+length_equal = 2
+formula = "AaAzBaBbBz"
+
+[[encoder.rules]]
+length_equal = 3
+formula = "AaAzBaBzCz"
+
+[[encoder.rules]]
+length_in_range = [4, 10]
+formula = "AaBzCaYzZz"
